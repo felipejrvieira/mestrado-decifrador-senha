@@ -1,0 +1,3 @@
+Alterações no LSP
+
+Adição de recurso para armazenar em uma lista as conexões perdidas, desta forma o DecifradorDeSenhas pode identificar quais conexões perdidas.

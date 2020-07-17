@@ -1,0 +1,87 @@
+Scheduler (Passos)
+
+1 - Ao chegar uma requisição, o servidor a divide em intervalos iguais (Atualmente está definido em intervalos de 500 algarismos)
+2 - Em seguida os intervalos são embaralhados.
+3 - O Servidor adiciona em uma lista de requisições a serem decifradas
+4 - O Servidor retira uma Requisição da fila e pega um intervalo
+5 - O Servidor reinsere a Requisição no final da fila.
+6 - O Servidor pega o primeiro Worker disponível
+7 - Atribui um intervalo para ser verificado pelo worker
+8 - Quando um Worker responde, ele é reinserido na lista de workers disponíveis.
+
+
+EXEMPLO
+
+00 .. 99, com uma fatia estática de 10, então este valor será quebrado em 10 pedaços
+00 .. 09
+10 .. 19
+20 .. 29
+30 .. 39
+40 .. 49
+50 .. 59
+60 .. 69
+70 .. 79
+80 .. 89
+90 .. 99
+Obs: Para evitar de ser sequencial e caso a solução seja 99 demorar muito, eu faço um randon nesta lista.
+Cada worker pega uma pequena fatia desta por vez, se tenho três workers ficaria da seguinte forma
+W1 00 .. 09
+W2 10 .. 19
+W3 20 .. 29
+W1 30 .. 39
+W2 40 .. 49
+W3 50 .. 59
+W1 60 .. 69
+W2 70 .. 79
+W3 80 .. 89
+W1 90 .. 99
+Para o caso de mais de um Requester o que eu faço. Eu tenho uma lista de Requesters. Assim que vai chegando eu vou enfileirando. Para permitir o balanceamento assim que um requester entrega uma fatia para ser processada ela vai para o fim da fila. desta forma sempre um pedaço de cada será processado por vez. Assim eu não tenho workers ociosos, nem requesters esperando. Vou tentar exemplificar
+R1
+ 
+00 .. 09
+10 .. 19
+20 .. 29
+30 .. 39
+40 .. 49
+50 .. 59
+60 .. 69
+70 .. 79
+80 .. 89
+90 .. 99
+R2
+00 .. 09
+10 .. 19
+20 .. 29
+30 .. 39
+40 .. 49
+50 .. 59
+60 .. 69
+70 .. 79
+80 .. 89
+90 .. 99
+Lista de Requester
+R1-R2
+Lista de Worker
+W1-W2-W3
+W1 00 .. 09 (R1)
+W2 00 .. 09 (R2)
+W3 10 .. 19 (R1)
+W1 10 .. 19 (R2)
+W2 20 .. 29 (R1)
+W3 20 .. 29 (R2)
+Caso neste momento chegasse um R3, ficaria assim:
+Lista de Requester
+R1-R2-R3
+W1 30 .. 39 (R1)
+W2 30 .. 39 (R2)
+W3 00 .. 09 (R3)
+W1 40 .. 49 (R1)
+Achou a senha do R2
+Lista de Requester
+R1-R3
+W2 10 .. 19 (R3)
+W3 50 .. 59 (R1)
+W1 20 .. 29 (R3)
+W2 60 .. 69 (R1)
+E assim em diante.
+
