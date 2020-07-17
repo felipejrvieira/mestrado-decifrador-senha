@@ -2,7 +2,7 @@
 
 O objetivo desse trabalho é desenvolver um sistema distribuído simples capaz de explorar o poder de vários processadores para acelerar o cumprimento de uma tarefa que exige computação intensiva. Em sua implementação, você irá incorporar recursos necessários para criar um sistema robusto, que é capaz de lidar com pacotes perdidos ou duplicados e com as possíveis falhas de clientes e servidores. Você também irá aprender o valor de criar um conjunto de abstrações em camadas na ligação entre protocolos de rede de baixo nível e aplicações de alto nível.
 
-Seu sistema irá implementar um decifrador de senhas distribuído.
+Seu sistema irá implementar um decifrador de senhas distribuído. Mais informações na [definição da atividade](https://github.com/felipejrvieira/mestrado-decifrador-senha/blob/master/documentos/Decifrador%20Distribu%C3%ADdo-%20Parte%20A.pdf).
 
 ## Passos
 
@@ -17,8 +17,8 @@ Seu sistema irá implementar um decifrador de senhas distribuído.
 
 ## Como usar
 
-1. Execute o *server*.
-2. Execute quantos *worker*s achar necessário.
-3. Execute o *requester*. A senha a ser quebrada deve estar em SHA1, possuir apenas números inteiros e se especifidado a quantidade de caractéres.
+1. Execute o *server*. (src/main/java/dev/felipejrvieira/decifradorsenha/Server.java)
+2. Execute quantos *worker*s achar necessário. (src/main/java/dev/felipejrvieira/decifradorsenha/Worker.java)
+3. Execute o *requester*. A senha a ser quebrada deve estar em SHA1, possuir apenas números inteiros e se especifidado a quantidade de caracteres. (src/main/java/dev/felipejrvieira/decifradorsenha/Requester.java)
 
 *Disciplina cursada em 2013.
